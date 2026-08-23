@@ -1,0 +1,33 @@
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+
+const userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, trim: true },
+    email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+    password: { type: String, required: true, minlength: 8, select: false },
+    phone: { type: String, trim: true },
+    avatarUrl: { type: String, default: "" },
+    role: { type: String, enum: ["user", "admin"], default: "user" },
+    status: { type: String, enum: ["active", "suspended"], default: "active" },
+    stats: {
+      itemsLost: { type: Number, default: 0 },
+      itemsFound: { type: Number, default: 0 },
+      recoveries: { type: Number, default: 0 },
+    },
+  },
+  { timestamps: true }
+);
+
+userSchema.pre("save", async function hashPassword(next) {
+  if (!this.isModified("password")) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+userSchema.methods.comparePassword = function comparePassword(candidate) {
+  return bcrypt.compare(candidate, this.password);
+};
+
+export default mongoose.model("User", userSchema);
