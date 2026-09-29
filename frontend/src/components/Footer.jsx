@@ -9,7 +9,7 @@ export default function Footer() {
         <div>
           <div className="font-display text-2xl font-bold text-ink mb-2">Findora</div>
           <p className="text-sm text-muted flex items-center gap-1.5">
-            <MapPin size={14} className="text-cyan" /> Chandigarh, India
+            <MapPin size={14} className="text-cyan" /> Across India
           </p>
           <p className="mt-4 text-sm text-muted max-w-xs">
             Helping lost things find their way home.

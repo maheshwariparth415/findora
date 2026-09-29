@@ -15,11 +15,20 @@ const itemSchema = new mongoose.Schema(
     },
     description: { type: String, required: true },
     images: [{ type: String }],
-    location: {
-      address: { type: String, required: true },
-      area: { type: String },
-      lat: { type: Number, required: true },
-      lng: { type: Number, required: true },
+   location: {
+      type: String,
+      required: [true, 'Please provide the specific location or landmark'],
+      trim: true,
+    },
+    city: {
+      type: String,
+      required: [true, 'Please provide the city'],
+      trim: true,
+    },
+    state: {
+      type: String,
+      required: [true, 'Please provide the state'],
+      trim: true,
     },
     occurredAt: { type: Date, required: true },
     // Only present on "lost" reports. Never returned by public-facing routes.

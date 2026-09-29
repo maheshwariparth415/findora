@@ -1,7 +1,5 @@
-// Realistic mock data scoped to Chandigarh, standing in for the MongoDB
-// collections until the Express API is connected. Import shapes mirror the
-// backend Mongoose models exactly so swapping in `api.get(...)` later is a
-// drop-in change.
+// Realistic mock data for Findora across India, standing in for the MongoDB
+// collections until the Express API is connected.
 import { computeMatch } from "./aiMatchingService.js";
 
 export const CATEGORIES = [
@@ -16,14 +14,14 @@ export const CATEGORIES = [
 ];
 
 export const AREAS = [
-  "Sector 17",
-  "Sector 22",
-  "Sector 35",
-  "Sector 43 (ISBT)",
-  "Elante Mall",
-  "PU Campus",
-  "Sukhna Lake",
-  "Sector 8",
+  "Metro Station",
+  "Airport Terminal",
+  "Railway Station",
+  "Central Market",
+  "University Campus",
+  "Tech Park",
+  "City Mall",
+  "Bus Terminal",
 ];
 
 export const lostItems = [
@@ -34,7 +32,9 @@ export const lostItems = [
     category: "Electronics",
     description: "White AirPods Pro charging case, small scratch on the lid, no earbuds inside.",
     images: ["airpods"],
-    location: { address: "Near Neelam Cinema, Sector 17", area: "Sector 17", lat: 30.7410, lng: 76.7822 },
+    city: "New Delhi",
+    state: "Delhi",
+    location: { address: "Near Rajiv Chowk Metro Gate 3", area: "Metro Station", lat: 28.6328, lng: 77.2197 },
     occurredAt: "2026-08-09",
     status: "match_found",
     ownerName: "Ritika M.",
@@ -46,7 +46,9 @@ export const lostItems = [
     category: "Wallets",
     description: "Black leather wallet with multiple card slots and a metro card inside.",
     images: ["wallet"],
-    location: { address: "Bus Stand, Sector 43 ISBT", area: "Sector 43 (ISBT)", lat: 30.7046, lng: 76.8016 },
+    city: "Mumbai",
+    state: "Maharashtra",
+    location: { address: "Bandra Kurla Complex, Near Gate 2", area: "Tech Park", lat: 19.0660, lng: 72.8687 },
     occurredAt: "2026-08-10",
     status: "match_found",
     ownerName: "Arjun S.",
@@ -56,9 +58,11 @@ export const lostItems = [
     type: "lost",
     name: "College ID Card",
     category: "Documents",
-    description: "Panjab University ID card, laminated, with a blue lanyard attached.",
+    description: "Student identity card, laminated, with a blue lanyard attached.",
     images: ["idcard"],
-    location: { address: "Student Centre, PU Campus", area: "PU Campus", lat: 30.7599, lng: 76.7654 },
+    city: "Bengaluru",
+    state: "Karnataka",
+    location: { address: "Central Library Lawn", area: "University Campus", lat: 12.9716, lng: 77.5946 },
     occurredAt: "2026-08-08",
     status: "searching",
     ownerName: "Simran K.",
@@ -70,7 +74,9 @@ export const lostItems = [
     category: "Keys",
     description: "Three keys on a red carabiner keyring, one is a Godrej lock key.",
     images: ["keys"],
-    location: { address: "Sector 35 Market", area: "Sector 35", lat: 30.7333, lng: 76.7794 },
+    city: "Mohali",
+    state: "Punjab",
+    location: { address: "Phase 7 Market", area: "Central Market", lat: 30.7046, lng: 76.7179 },
     occurredAt: "2026-08-07",
     status: "searching",
     ownerName: "Naveen T.",
@@ -82,7 +88,9 @@ export const lostItems = [
     category: "Bags",
     description: "Grey Wildcraft backpack with a laptop sleeve and a small keychain on the zip.",
     images: ["backpack"],
-    location: { address: "Elante Mall, Gate 2", area: "Elante Mall", lat: 30.7050, lng: 76.8018 },
+    city: "Gurugram",
+    state: "Haryana",
+    location: { address: "Cyber Hub Gate 1", area: "Tech Park", lat: 28.4950, lng: 77.0895 },
     occurredAt: "2026-08-11",
     status: "searching",
     ownerName: "Pooja R.",
@@ -95,9 +103,11 @@ export const foundItems = [
     type: "found",
     name: "AirPods Case (White)",
     category: "Electronics",
-    description: "Found a white earbuds case near the cinema entrance, minor scuff mark on top.",
+    description: "Found a white earbuds case near the subway entrance, minor scuff mark on top.",
     images: ["airpods"],
-    location: { address: "Neelam Cinema Road, Sector 17", area: "Sector 17", lat: 30.7412, lng: 76.7825 },
+    city: "New Delhi",
+    state: "Delhi",
+    location: { address: "Rajiv Chowk Underpass", area: "Metro Station", lat: 28.6330, lng: 77.2199 },
     occurredAt: "2026-08-10",
     status: "match_found",
     finderName: "Karan V.",
@@ -107,9 +117,11 @@ export const foundItems = [
     type: "found",
     name: "Black Wallet",
     category: "Wallets",
-    description: "Black wallet, several cards inside, found near the ISBT bus bay.",
+    description: "Black wallet, several cards inside, found near the transit bay.",
     images: ["wallet"],
-    location: { address: "ISBT Sector 43, Bay 6", area: "Sector 43 (ISBT)", lat: 30.7048, lng: 76.8020 },
+    city: "Mumbai",
+    state: "Maharashtra",
+    location: { address: "BKC Bus Stand, Bay 4", area: "Bus Terminal", lat: 19.0662, lng: 72.8689 },
     occurredAt: "2026-08-10",
     status: "match_found",
     finderName: "Deepak N.",
@@ -119,9 +131,11 @@ export const foundItems = [
     type: "found",
     name: "Silver Ring",
     category: "Jewelry",
-    description: "Small silver ring with a blue stone, found near the lake promenade.",
+    description: "Small silver ring with a blue stone, found near the park promenade.",
     images: ["ring"],
-    location: { address: "Sukhna Lake Promenade", area: "Sukhna Lake", lat: 30.7420, lng: 76.8188 },
+    city: "Hyderabad",
+    state: "Telangana",
+    location: { address: "Necklace Road Promenade", area: "Central Market", lat: 17.4239, lng: 78.4738 },
     occurredAt: "2026-08-09",
     status: "searching",
     finderName: "Anita B.",
@@ -131,18 +145,17 @@ export const foundItems = [
     type: "found",
     name: "Denim Jacket",
     category: "Apparel",
-    description: "Blue denim jacket, size M, left on a bench near Sector 8 market.",
+    description: "Blue denim jacket, size M, left on a bench near food street.",
     images: ["jacket"],
-    location: { address: "Sector 8 Market", area: "Sector 8", lat: 30.7386, lng: 76.7783 },
+    city: "Pune",
+    state: "Maharashtra",
+    location: { address: "FC Road Food Lane", area: "Central Market", lat: 18.5204, lng: 73.8567 },
     occurredAt: "2026-08-06",
     status: "searching",
     finderName: "Rohit G.",
   },
 ];
 
-// Precompute matches between lost/found pairs of the same category so the
-// Explore page and map can display realistic percentages without recomputing
-// on every render.
 export const matches = [];
 for (const lost of lostItems) {
   for (const found of foundItems) {
@@ -159,7 +172,7 @@ export const notifications = [
     id: "n1",
     type: "match_found",
     title: "Potential Match Found",
-    message: "Your lost AirPods case may match a found item near Sector 17.",
+    message: "Your lost AirPods case may match a found item near Rajiv Chowk.",
     read: false,
     createdAt: "2026-08-11T09:12:00Z",
   },

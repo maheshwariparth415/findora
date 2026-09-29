@@ -61,7 +61,7 @@ function Hero() {
 
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <SectionTag>Live in Chandigarh</SectionTag>
+          <SectionTag>Live Nationwide</SectionTag>
           <h1 className="font-display text-5xl md:text-6xl font-bold leading-[1.08] text-ink">
             Lost Something?
             <br />
@@ -125,7 +125,7 @@ function Hero() {
               <p className="text-[10px] uppercase tracking-widest text-muted">Match Found</p>
             </motion.div>
             <div className="absolute top-4 right-6 text-[10px] font-mono uppercase tracking-widest text-cyan/70">
-              Chandigarh · Live Scan
+              Pan-India · Live Scan
             </div>
           </div>
         </motion.div>
@@ -146,7 +146,7 @@ function ProblemSection() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-14">
-          <StatCounter value={1032} label="Items lost every week in Chandigarh" />
+          <StatCounter value={1032} label="Items lost every week across major cities" />
           <StatCounter value={41} suffix="%" label="Unclaimed belongings after 30 days" />
           <StatCounter value={6} suffix=" days" label="Average time to recover manually" />
           <StatCounter value={612} label="Successful Findora recoveries" />
@@ -293,10 +293,10 @@ function AboutSection() {
         <p className="text-muted text-lg leading-relaxed">
           Findora is designed to transform the traditional lost-and-found process into a centralized,
           intelligent digital platform — combining AI matching, GPS intelligence, secure verification,
-          and cloud infrastructure on architecture built to scale beyond a single city.
+          and cloud infrastructure on architecture built to scale nationwide.
         </p>
         <div className="flex justify-center gap-3 mt-8 flex-wrap">
-          {["AI Matching", "GPS Intelligence", "Secure Verification", "Cloud Native", "Scalable Architecture"].map((t) => (
+          {["AI Matching", "Pan-India Coverage", "Secure Verification", "Cloud Native", "Scalable Architecture"].map((t) => (
             <span key={t} className="text-xs font-mono uppercase tracking-wide px-3 py-1.5 rounded-full border border-line text-muted">
               {t}
             </span>

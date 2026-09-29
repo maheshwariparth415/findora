@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 /**
  * Polished stand-in for a real Google Maps embed. Renders lost/found/match
- * markers on a stylized grid "map" of Chandigarh's sector layout, with click
+ * markers on a stylized grid map across regions in India, with click
  * interactions identical to what the real Maps integration will need
  * (marker click -> preview card). To go live:
  *

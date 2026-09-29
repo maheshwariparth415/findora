@@ -14,7 +14,7 @@ export default function ReportLost() {
   const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "", category: CATEGORIES[0], description: "", file: null, imageUrl: "",
-    locationMode: "manual", address: "", area: "", lat: 30.7333, lng: 76.7794,
+    locationMode: "manual", address: "", area: "", city: "", state: "", lat: 20.5937, lng: 78.9629,
     date: "", time: "", verifyQuestion: "Unique mark or scratch", verifyAnswer: "",
   });
 
@@ -49,6 +49,8 @@ export default function ReportLost() {
         category: form.category,
         description: form.description,
         images: imageUrl ? [imageUrl] : [],
+        city: form.city,
+        state: form.state,
         location: { address: form.address, area: form.area, lat: Number(form.lat), lng: Number(form.lng) },
         occurredAt,
         verification: { question: form.verifyQuestion, answer: form.verifyAnswer },
@@ -92,8 +94,12 @@ export default function ReportLost() {
                 <button type="button" onClick={useCurrentLocation} className="px-3 py-2 rounded-lg text-sm border border-cyan text-cyan bg-cyan/10 flex items-center gap-2"><LocateFixed size={14}/> Use current location</button>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
-                <Field label="Address"><div className="flex items-center gap-2"><MapPin size={16} className="text-cyan" /><input required value={form.address} onChange={(e) => update({ address: e.target.value })} placeholder="e.g. Sector 17" className="input" /></div></Field>
-                <Field label="Area / Sector"><input value={form.area} onChange={(e) => update({ area: e.target.value })} placeholder="Sector 17" className="input" /></Field>
+                <Field label="State"><input required value={form.state} onChange={(e) => update({ state: e.target.value })} placeholder="e.g. Maharashtra, Punjab, Delhi" className="input" /></Field>
+                <Field label="City"><input required value={form.city} onChange={(e) => update({ city: e.target.value })} placeholder="e.g. Mumbai, Mohali, New Delhi" className="input" /></Field>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Field label="Address / Landmark"><div className="flex items-center gap-2"><MapPin size={16} className="text-cyan" /><input required value={form.address} onChange={(e) => update({ address: e.target.value })} placeholder="e.g. Metro Station, Terminal 3" className="input" /></div></Field>
+                <Field label="Area / Locality"><input value={form.area} onChange={(e) => update({ area: e.target.value })} placeholder="e.g. Andheri East, Sector 17" className="input" /></Field>
               </div>
               <div className="grid grid-cols-2 gap-4"><Field label="Latitude"><input required type="number" step="any" value={form.lat} onChange={(e) => update({ lat: e.target.value })} className="input" /></Field><Field label="Longitude"><input required type="number" step="any" value={form.lng} onChange={(e) => update({ lng: e.target.value })} className="input" /></Field></div>
               <p className="text-xs text-muted">GPS: {Number(form.lat).toFixed(5)}, {Number(form.lng).toFixed(5)}</p>
@@ -118,4 +124,4 @@ export default function ReportLost() {
 
 function StepIndicator({ steps, current }) { return <div className="flex items-center">{steps.map((s,i)=><React.Fragment key={s}><div className="flex flex-col items-center gap-1.5"><div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-mono border ${i<current?"bg-cyan text-void border-cyan":i===current?"border-cyan text-cyan":"border-line text-muted"}`}>{i<current?<Check size={14}/>:i+1}</div><span className={`text-[11px] hidden sm:block ${i===current?"text-ink":"text-muted"}`}>{s}</span></div>{i<steps.length-1&&<div className={`flex-1 h-px mx-2 ${i<current?"bg-cyan":"bg-line"}`}/>}</React.Fragment>)}</div>; }
 function Field({label,children}){return <label className="block"><span className="block text-xs uppercase tracking-wide text-muted mb-2">{label}</span>{children}</label>;}
-function ConfirmationScreen(){return <div className="pt-40 pb-24 px-6 max-w-lg mx-auto text-center min-h-screen"><div className="w-16 h-16 mx-auto rounded-full bg-cyan/15 flex items-center justify-center mb-6"><Check size={28} className="text-cyan"/></div><h1 className="font-display text-2xl font-bold text-ink mb-3">We're on it.</h1><p className="text-muted">Your report is live and Findora's matching engine is scanning found items across Chandigarh.</p></div>;}
+function ConfirmationScreen(){return <div className="pt-40 pb-24 px-6 max-w-lg mx-auto text-center min-h-screen"><div className="w-16 h-16 mx-auto rounded-full bg-cyan/15 flex items-center justify-center mb-6"><Check size={28} className="text-cyan"/></div><h1 className="font-display text-2xl font-bold text-ink mb-3">We're on it.</h1><p className="text-muted">Your report is live and Findora's matching engine is scanning found items across India.</p></div>;}

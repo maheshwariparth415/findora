@@ -5,11 +5,13 @@ import Notification from "../models/Notification.js";
 import { computeMatch } from "../services/aiMatchingService.js";
 
 export const listItems = asyncHandler(async (req, res) => {
-  const { type, category, q, area, status } = req.query;
+  const { type, category, q, area, city, state, status } = req.query;
   const filter = {};
   if (type) filter.type = type;
   if (category) filter.category = category;
   if (area) filter["location.area"] = area;
+  if (city) filter.city = new RegExp(city, "i");
+  if (state) filter.state = new RegExp(state, "i");
   if (status) filter.status = status;
   if (q) filter.$or = [{ name: new RegExp(q, "i") }, { description: new RegExp(q, "i") }];
   const items = await Item.find(filter).sort({ createdAt: -1 }).limit(100);
@@ -31,12 +33,12 @@ export const getItem = asyncHandler(async (req, res) => {
 });
 
 export const createItem = asyncHandler(async (req, res) => {
-  const { type, name, category, description, images, location, occurredAt, verification } = req.body;
+  const { type, name, category, description, images, location, city, state, occurredAt, verification } = req.body;
   if (!["lost", "found"].includes(type)) {
     res.status(400); throw new Error("Type must be lost or found.");
   }
-  if (!name || !category || !description || !location?.address || location?.lat == null || location?.lng == null || !occurredAt) {
-    res.status(400); throw new Error("Name, category, description, location and date are required.");
+  if (!name || !category || !description || !city || !state || !location?.address || location?.lat == null || location?.lng == null || !occurredAt) {
+    res.status(400); throw new Error("Name, category, description, city, state, location, and date are required.");
   }
   if (type === "lost" && (!verification?.question || !verification?.answer)) {
     res.status(400); throw new Error("Lost reports require a private verification question and answer.");
@@ -45,7 +47,7 @@ export const createItem = asyncHandler(async (req, res) => {
   const item = await Item.create({
     owner: req.user._id, type, name, category, description,
     images: Array.isArray(images) ? images : [],
-    location, occurredAt,
+    location, city, state, occurredAt,
     verification: type === "lost" ? verification : undefined,
   });
 
