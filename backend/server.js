@@ -34,6 +34,11 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-connectDB().then(() => {
+// Connect to DB immediately for serverless / local
+connectDB().catch((err) => console.error("[db] Init error:", err));
+
+if (process.env.NODE_ENV !== "production") {
   app.listen(PORT, () => console.log(`[server] Findora API running on port ${PORT}`));
-});
+}
+
+export default app;
